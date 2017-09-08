@@ -33,7 +33,7 @@ export class PredictComponent {
 }
 
 interface Tag {
-    TagId: string;
-    Tag: string;
-    Probability: number;
+    tagId: string;
+    tag: string;
+    probability: number;
 }

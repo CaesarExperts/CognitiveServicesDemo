@@ -9,6 +9,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { PredictComponent } from "./components/predict/predict.component";
+import { PersonsComponent } from "./components/persons/persons.component";
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { PredictComponent } from "./components/predict/predict.component";
         NavMenuComponent,
         FetchDataComponent,
         PredictComponent,
+        PersonsComponent,
         HomeComponent
     ],
     imports: [
@@ -27,6 +29,7 @@ import { PredictComponent } from "./components/predict/predict.component";
             { path: 'home', component: HomeComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'predict', component: PredictComponent },
+            { path: 'persons', component: PersonsComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

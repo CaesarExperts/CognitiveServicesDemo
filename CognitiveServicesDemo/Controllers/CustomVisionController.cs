@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 
 namespace CognitiveServicesDemo.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     public class CustomVisionController : Controller
     {

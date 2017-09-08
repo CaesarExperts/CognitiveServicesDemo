@@ -20,35 +20,35 @@ namespace CognitiveServicesDemo.Controllers
             faceClient = new FaceServiceClient("fb9c9adb7bae49bba1af60643741a031", "https://westeurope.api.cognitive.microsoft.com/face/v1.0");
         }
 
-        [Route("api/[controller]/persongroups")]
+        [Route("persongroups")]
         [HttpGet]
         public async Task<PersonGroup[]> GetPersonGroups()
         {
             return await faceClient.ListPersonGroupsAsync();
         }
 
-        [Route("api/[controller]/persongroups/create")]
+        [Route("persongroups/create")]
         [HttpPost]
         public async Task CreatePersonGroupAsync(string personGroupId, string name)
         {
             await faceClient.CreatePersonGroupAsync(personGroupId, name);
         }
 
-        [Route("api/[controller]/persongroups/{personGroupId}")]
+        [Route("persongroups/{personGroupId}")]
         [HttpGet]
         public async Task<PersonGroup> GetPersonGroups(string personGroupId)
         {
             return await faceClient.GetPersonGroupAsync(personGroupId);
         }
 
-        [Route("api/[controller]/persongroups/{personGroupId}/persons")]
+        [Route("persongroups/{personGroupId}/persons")]
         [HttpGet]
         public async Task<Person[]> GetPersonsAsync(string personGroupId)
         {
             return await faceClient.ListPersonsAsync(personGroupId);
         }
 
-        [Route("api/[controller]/persongroups/{personGroupId}/persons/create")]
+        [Route("persongroups/{personGroupId}/persons/create")]
         [HttpPost]
         public async Task<string> CreatePersonAsync(string personGroupId, string name)
         {
@@ -56,14 +56,14 @@ namespace CognitiveServicesDemo.Controllers
             return res.PersonId.ToString();
         }
 
-        [Route("api/[controller]/persongroups/{personGroupId}/persons/{personId}")]
+        [Route("persongroups/{personGroupId}/persons/{personId}")]
         [HttpGet]
         public async Task<Person> GetPersonAsync(string personGroupId, string personId)
         {
             return await faceClient.GetPersonAsync(personGroupId, new Guid(personId));
         }
 
-        [Route("api/[controller]/persongroups/{personGroupId}/persons/{personId}/addface")]
+        [Route("persongroups/{personGroupId}/persons/{personId}/addface")]
         [HttpPost]
         public async Task<string> GetPersonsAsync(string personGroupId, string personId, string imageUrl)
         {
@@ -71,7 +71,7 @@ namespace CognitiveServicesDemo.Controllers
             return res.PersistedFaceId.ToString();
         }
 
-        [Route("api/[controller]/persongroups/{personGroupId}/persons/{personId}/verifyface/{faceId}")]
+        [Route("persongroups/{personGroupId}/persons/{personId}/verifyface/{faceId}")]
         [HttpPost]
         public async Task<VerifyResult> VerifyPersonAsync(string personGroupId, string personId, string faceId)
         {
@@ -79,7 +79,7 @@ namespace CognitiveServicesDemo.Controllers
             return res;
         }
 
-        [Route("api/[controller]/detect")]
+        [Route("detect")]
         [HttpPost]
         public async Task<Face[]> DetectAsync(string imageUrl)
         {
