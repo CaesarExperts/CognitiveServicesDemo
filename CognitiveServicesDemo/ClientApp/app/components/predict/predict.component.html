@@ -1,0 +1,19 @@
+<h1>Custom Vision Prediction</h1>
+
+<span>Upload</span>
+<input type="file" id="btnUpload" value="Upload" (change)="fileChange($event)" class="upload" />
+
+<table class='table' *ngIf="tags">
+    <thead>
+        <tr>
+            <th>Tag</th>
+            <th>Probability</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tag of tags">
+            <td>{{ tag.Tag }}</td>
+            <td>{{ tag.Probability }}</td>
+        </tr>
+    </tbody>
+</table>
