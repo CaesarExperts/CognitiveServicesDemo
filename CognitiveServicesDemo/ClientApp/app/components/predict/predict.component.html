@@ -1,7 +1,15 @@
 <h1>Custom Vision Prediction</h1>
 
-<span>Upload</span>
-<input type="file" id="btnUpload" value="Upload" (change)="fileChange($event)" class="upload" />
+<form (ngSubmit)="predict()">
+    <div class="form-group">
+        <label for="imageFile">Image</label>
+        <input type="file" id="imageFile" value="Upload" class="upload" />
+    </div>
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+</form>
 
 <table class='table' *ngIf="tags">
     <thead>
@@ -12,8 +20,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let tag of tags">
-            <td>{{ tag.tag }}</td>
-            <td>{{ tag.probability }}</td>
+            <td>{{ tag.Tag }}</td>
+            <td>{{ tag.Probability }}</td>
         </tr>
     </tbody>
 </table>

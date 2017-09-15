@@ -58,7 +58,7 @@ export class PersonsComponent {
         }).subscribe(() => {
 
             var inp = document.getElementById('imageFile') as any;
-            let fileList: FileList = inp.Files;
+            let fileList: FileList = inp.files;
             if (fileList != null && fileList.length > 0) {
 
                 let file: File = fileList[0];

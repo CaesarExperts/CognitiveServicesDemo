@@ -13,9 +13,10 @@ export class PredictComponent {
     constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
     }
 
-    public fileChange(event: any) {
-        let fileList: FileList = event.target.files;
-        if (fileList.length > 0) {
+    public predict() {
+        var inp = document.getElementById('imageFile') as any;
+        let fileList: FileList = inp.files;
+        if (fileList != null && fileList.length > 0) {
             let file: File = fileList[0];
             let formData: FormData = new FormData();
             formData.append('uploadFile', file, file.name);
