@@ -13,6 +13,10 @@ export class PersonsComponent {
     public verifyResult: VerifyResult;
     public faces: Face[];
 
+    public addPersonGroupId: string;
+    public addPersonName: string;
+    public addPersonImageUrl: string;
+
     public personGroupId: string;
     public personId: string;
     public imageUrl: string;
@@ -32,7 +36,7 @@ export class PersonsComponent {
         }).subscribe();
     }
 
-    public onSubmit() {
+    public verify() {
         let detectUrl = `api/Face/detect?imageUrl=${this.imageUrl}`;
         this.http.post(detectUrl, null).map((res) => {
             this.faces = res.json();
@@ -42,6 +46,38 @@ export class PersonsComponent {
             this.http.post(url, null).map((res) => {
                 this.verifyResult = res.json();
             }).subscribe();
+        });
+    }
+
+    public addPerson() {
+        let personId = "";
+
+        let detectUrl = this.baseUrl + `api/Face/persongroups/${this.addPersonGroupId}/persons/create/${this.addPersonName}`;
+        this.http.post(detectUrl, null).map((res) => {
+            personId = res.text();
+        }).subscribe(() => {
+
+            var inp = document.getElementById('imageFile') as any;
+            let fileList: FileList = inp.Files;
+            if (fileList.length > 0) {
+
+                let file: File = fileList[0];
+                let formData: FormData = new FormData();
+                formData.append('uploadFile', file, file.name);
+                let headers = new Headers()
+                let options = new RequestOptions({ headers: headers });
+                let addFaceUrl = this.baseUrl + `api/Face/persongroups/${this.addPersonGroupId}/persons/${personId}/addface`;
+
+                this.http.post(addFaceUrl, formData, options).map((res) => {
+                    let faceId = res.text();
+                }).subscribe(data => console.log('success'), error => console.log(error))
+            } else {
+                let addFaceUrl = this.baseUrl + `api/Face/persongroups/${this.addPersonGroupId}/persons/${personId}/addface?imageUrl=${this.addPersonImageUrl}`;
+
+                this.http.post(addFaceUrl, null).map((res) => {
+                    let faceId = res.text();
+                }).subscribe();
+            }
         })
     }
 }

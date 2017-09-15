@@ -35,21 +35,44 @@
             </tr>
         </tbody>
     </table>
+    <form (ngSubmit)="addPerson()">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="addPersonGroupId">PersonGroupId</label>
+                <input type="text" [(ngModel)]="addPersonGroupId" name="addPersonGroupId" placeholder="PersonGroupId" class="form-control" />
+            </div>
+            <label for="addPersonName">Name</label>
+            <input type="text" [(ngModel)]="addPersonName" name="addPersonName" placeholder="Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="addPersonImageUrl">Image url</label>
+            <input type="text" [(ngModel)]="addPersonImageUrl" name="addPersonImageUrl" placeholder="Your image url" value="Upload" class="form-control" />
+        </div>
+        <span>Or</span>
+        <div class="form-group">
+            <label for="imageFile">Image</label>
+            <input type="file" id="imageFile" value="Upload" class="upload" />
+        </div>
+        <div>
+            <input type="submit" value="Save" />
+        </div>
+    </form>
 
     <h2>Verify</h2>
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="verify()">
         <div class="form-group">
             <label for="personId">PersonGroupId</label>
             <input type="text" [(ngModel)]="personGroupId" name="personGroupId" placeholder="PersonGroupId" class="form-control" />
         </div>
         <div class="form-group">
             <label for="personId">PersonId</label>
-            <input type="text" [(ngModel)]="personId" name="personId" placeholder="PersonId"  class="form-control" />
+            <input type="text" [(ngModel)]="personId" name="personId" placeholder="PersonId" class="form-control" />
         </div>
         <div class="form-group">
             <label for="image">Image url</label>
             <input type="text" [(ngModel)]="imageUrl" name="imageUrl" placeholder="Your image url" value="Upload" class="form-control" />
         </div>
+
         <div>
             <input type="submit" value="Verify" />
         </div>

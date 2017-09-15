@@ -48,7 +48,7 @@ namespace CognitiveServicesDemo.Controllers
             return await faceClient.ListPersonsAsync(personGroupId);
         }
 
-        [Route("persongroups/{personGroupId}/persons/create")]
+        [Route("persongroups/{personGroupId}/persons/create/{name}")]
         [HttpPost]
         public async Task<string> CreatePersonAsync(string personGroupId, string name)
         {
@@ -70,6 +70,26 @@ namespace CognitiveServicesDemo.Controllers
             AddPersistedFaceResult res = await faceClient.AddPersonFaceAsync(personGroupId, new Guid(personId), imageUrl);
             return res.PersistedFaceId.ToString();
         }
+
+        [HttpPost]
+        [Route("persongroups/{personGroupId}/persons/{personId}/addface/file")]
+        public async Task<string> UploadJsonFile(string personGroupId, string personId)
+        {
+            var files = HttpContext.Request.Form.Files;
+            if (files.Count > 0)
+            {
+                foreach (var file in files)
+                {
+                    using (var stream = file.OpenReadStream())
+                    {
+                        var res = await faceClient.AddPersonFaceAsync(personGroupId, new Guid(personId), stream);
+                        return res.PersistedFaceId.ToString();
+                    }
+                }
+            }
+            return null;
+        }
+
 
         [Route("persongroups/{personGroupId}/persons/{personId}/verifyface/{faceId}")]
         [HttpPost]
