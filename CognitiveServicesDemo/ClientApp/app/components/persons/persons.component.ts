@@ -59,7 +59,7 @@ export class PersonsComponent {
 
             var inp = document.getElementById('imageFile') as any;
             let fileList: FileList = inp.Files;
-            if (fileList.length > 0) {
+            if (fileList != null && fileList.length > 0) {
 
                 let file: File = fileList[0];
                 let formData: FormData = new FormData();
@@ -70,10 +70,9 @@ export class PersonsComponent {
 
                 this.http.post(addFaceUrl, formData, options).map((res) => {
                     let faceId = res.text();
-                }).subscribe(data => console.log('success'), error => console.log(error))
-            } else {
+                }).subscribe();
+            } else if (this.addPersonImageUrl != null) {
                 let addFaceUrl = this.baseUrl + `api/Face/persongroups/${this.addPersonGroupId}/persons/${personId}/addface?imageUrl=${this.addPersonImageUrl}`;
-
                 this.http.post(addFaceUrl, null).map((res) => {
                     let faceId = res.text();
                 }).subscribe();
